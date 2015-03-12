@@ -1,0 +1,158 @@
+<!DOCTYPE html-->
+<html>
+<head>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<script type="text/javascript" charset="utf-8"
+src="phonegap.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+<style type="text/css">
+    p{
+        text-align: center;
+    }
+    
+</style>
+<title>Registro y Calificaciones de Alumnos</title>
+<script type="text/javascript">
+$(document).ready(function inicio(){
+/*alert("Listo");*/
+var btnEnvio=$("#enviar");
+btnEnvio.click(function enviarDatos(){
+    var nom=$("#Nombre").val();
+    var apep=$("#Apellidop").val();
+    var apem=$("#Apellidom").val();
+    var tel=$("#Telefono").val();
+    var email=$("#Email").val();
+    var numc=$("#NumeroC").val();
+    var smt=$("#Semestre").val();
+    /*alert("Listo");*/
+    $.ajax({
+        type:"POST",
+        url:"envio.php",
+        data:"Nombre="+nom+"&Apellidop="+apep+"&Apellidom="+apem+"&Telefono="+tel+"&Email="+email+"&NumeroC="+numc+"&Semestre="+smt,
+        success: recepcion
+        });
+});
+function recepcion(datos){
+    /*alert("Listo:"+datos);*/
+    var resp=$("#respuesta");
+    resp.html(datos);
+}
+
+
+var botonEnvio=$("#enviarr");
+botonEnvio.click(function enviarCalificaciones(){
+    var p1=parseInt($("#primerp").val());
+    var p2=parseInt($("#segundop").val());
+    var p3=parseInt($("#tercerop").val());
+    var p4=parseInt($("#cuartop").val());
+    var resultado=(p1+p2+p3+p4)/4;
+    var pro=$("#promedio");
+    pro=resultado;
+    /*alert("Listo");*/
+    $.ajax({
+        type:"POST",
+        url:"envio2.php",
+        data:"primerp="+p1+"&segundop="+p2+"&tercerop="+p3+"&cuartop="+p4+"&promedio="+pro,
+        success: recepcion2
+         });
+
+function recepcion2(cal){
+    /*alert("Listo:"+datos);*/
+    var resp=$("#respuesta2");
+    resp.html(cal);
+}
+});
+});
+
+
+</script>
+</head>
+<body>
+
+<div data-role="page"id="principal" data-theme="b">
+<div data-role="header"></div>
+<div data-role="content">
+<p>Pagina de los expedientes de los alumnos</p>
+<a href="#Pagina2" data-role="button"data-transition="slide">Datos del Alumno</a>
+<a href="#Pagina3" data-role="button"data-transition="slideup">Calificaciones</a>
+<br/>
+<p style="text-align:center; font-size:10px;">Derechos Reservados</p>
+</div>
+<div data-role="footer">
+ </div>
+</div>
+    <!--pagina2-->
+
+    <div data-role="page" id="Pagina2">
+    <div data-role="header">
+     <a href="#principal"data-role="button"data-transition="flip"data-add-back-btn="true"data-icon="home">Regresar</a>
+     </div>
+           
+            
+<div data-role="content">
+<p style="text-align:center">Datos Personales del Alumno</p></div>
+<div data-role="content">
+<form method="POST" action="envio.php">
+<div class="ui-field-contain">
+<label for="Nombre">Nombre:</label>
+<input type="text" name="Nombre" id="Nombre">
+<label for="Apellidop">Apellido Paterno: </label>
+<input type="text" name="Apellidop" id="Apellidop" /><br>
+<label for="Apellidom">Apellido Materno: </label>
+<input type="text" name="Apellidom" id="Apellidom" /><br>
+<label for="Telefono">Telefono: </label>
+<input type="text" name="Telefono" id="Telefono" /><br>
+<label for="Email">E-mail:</label>
+<input type="text" name="Email" id="Email" placeholder="usuario@hotmail.com">
+<label for="NumeroC">Número de Control: </label>
+<input type="text" name="NumeroC" id="NumeroC" /><br>
+<label for="Semestre">Semestre: </label>
+<input type="text" name="Semestre" id="Semestre" /><br>
+</div>		
+<input type="button" name="enviar" id="enviar" value="Registrar Datos">
+</form>
+<div id="respuesta">
+    
+</div>
+</div>
+<div data-role="footer">
+<p style="text-align:center; font-size:10px;">Instituto Tecnológico Superior de Libres</p>
+
+</div>
+</div>
+   <!--pagina3-->
+
+    <div data-role="page" id="Pagina3">
+    <div data-role="header">
+     <a href="#principal"data-role="button"data-transition="flip"data-add-back-btn="true"data-icon="home">Regresar</a>
+             </div>
+           
+            
+<div data-role="content">
+<p style="text-align:center">Calificaciones del Alumno</p></div>
+<div data-role="content">
+<form method="POST" action="envio2.php">
+<label for="primerp">Primer parcial:</label>
+<input type="text" value=" " id="primerp" />
+<label for="segundop">Segundo parcial:</label>
+<input type="text" value=" " id="segundop" />
+<label for="tercerop">Tercer parcial:</label>
+<input type="text" value=" " id="tercerop" />
+<label for="cuartop">Cuarto parcial:</label>
+<input type="text" value=" " id="cuartop" />
+<label for="promedio">Promedio: </label>
+<input type="text" value=" " id="promedio" />
+
+<input type="button" name="enviarr" id="enviarr" value="Registrar Calificaciones">
+
+
+</form>
+<div id="respuesta2">
+    
+</div>
+</div>
+</div>
+    </body>
+</html>
+</div>
