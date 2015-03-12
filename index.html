@@ -28,7 +28,7 @@ btnEnvio.click(function enviarDatos(){
     /*alert("Listo");*/
     $.ajax({
         type:"POST",
-        url:"envio.php",
+        url:"http://alexcastroisc.260mb.net/envio.php",
         data:"Nombre="+nom+"&Apellidop="+apep+"&Apellidom="+apem+"&Telefono="+tel+"&Email="+email+"&NumeroC="+numc+"&Semestre="+smt,
         success: recepcion
         });
@@ -52,7 +52,7 @@ botonEnvio.click(function enviarCalificaciones(){
     /*alert("Listo");*/
     $.ajax({
         type:"POST",
-        url:"envio2.php",
+        url:"http://alexcastroisc.260mb.net/envio2.php",
         data:"primerp="+p1+"&segundop="+p2+"&tercerop="+p3+"&cuartop="+p4+"&promedio="+pro,
         success: recepcion2
          });
